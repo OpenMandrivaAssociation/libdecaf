@@ -83,9 +83,11 @@ This package contains development files for %{name}.
 %prep
 %autosetup -p1 -n %{pname}-code-%{commit}
 %cmake \
+	-DENABLE_SHARED:BOOL=ON \
 	-DENABLE_STATIC:BOOL=OFF \
 	-DENABLE_TESTS:BOOL=ON \
-        -G Ninja
+	-DENABLE_STRICT:BOOL=OFF \
+	-G Ninja
 
 %build
 %ninja_build -C build
