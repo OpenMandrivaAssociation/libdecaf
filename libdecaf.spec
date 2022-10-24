@@ -1,22 +1,26 @@
 %define pname ed448goldilocks
-%define commit 41f349ff802901dc8bd4db8324a462d371713f7f
+%define commit 7d71a37e0cd27105154d425ac200bd183a8a4c1b
 %define shortcommit %(c=%{commit}; echo ${c:0:8})
 
 %define sname decaf
 %define	major 0
-%define	libname %mklibname %{sname} %{major}
+%define	libname %mklibname %{sname}
 %define develname %mklibname %{sname} -d
 
 Summary:	An implementation of elliptic curve cryptograph
 Name:		lib%{sname}
 #Version:	1.0.0
-Version:	1.0.1~git20210602
-Release:	1
+Version:	1.0.1~git20221004
+Release:	2
 License:	MIT
 Group:		System/Libraries
 URL:		https://ed448goldilocks.sourceforge.io/
 #Source0:	https://downloads.sourceforge.net/ed448goldilocks/%{name}-%{version}.tgz
-Source0:	%{pname}-code-%{commit}.zip
+# git clone git://git.code.sf.net/p/ed448goldilocks/code ed448goldilocks-code
+# cd ed448goldilocks-code; commit=$(git log --format="%H" -n 1); cd..
+# mv ed448goldilocks-code ed448goldilocks-code-$commit
+# tar cvJ --exclude .gti -f ed448goldilocks-code-${commit}.tar.xz ed448goldilocks-code-$commit
+Source0:	%{pname}-code-%{commit}.tar.xz
 
 BuildRequires:	cmake
 BuildRequires:	ninja
@@ -94,3 +98,7 @@ This package contains development files for %{name}.
 
 %install
 %ninja_install -C build
+
+%check
+%ninja_test -C build
+
