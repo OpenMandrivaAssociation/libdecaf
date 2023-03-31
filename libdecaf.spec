@@ -11,7 +11,7 @@ Summary:	An implementation of elliptic curve cryptograph
 Name:		lib%{sname}
 #Version:	1.0.0
 Version:	1.0.1~git20221004
-Release:	2
+Release:	3
 License:	MIT
 Group:		System/Libraries
 URL:		https://ed448goldilocks.sourceforge.io/
